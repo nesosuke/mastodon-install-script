@@ -19,7 +19,7 @@ su - mastodon
 ```
 ##  Set Your Instance Name
 ```
-export INSTANCE=YOURINSTANCEDOMAIN  
+export INSTANCE=YOURDOMAIN  
 ```  
 # Run the script part1 
 ```
