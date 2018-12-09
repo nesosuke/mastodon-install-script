@@ -17,6 +17,7 @@ sudo apt install git vim curl
 # Extend swapfile
 sudo vim /etc/dphys-swapfile
 	# "CONF_SWAPSIZE": 100-->2048
+sudo systemctl restart dphys-swapfile
 
 # Create user "mastodon"
 sudo adduser mastodon
