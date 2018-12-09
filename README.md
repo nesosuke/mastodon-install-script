@@ -1,13 +1,15 @@
 # NOTICE
+**RUN ONLY ON YOUR RESPONSIBLLITY.**  
+
 This script is only for RasPi (ARMv6).  
 In case of me, I executed on `RasPi zero w` and `Raspbian Stretch based on Debian 9.6`.  
 
 The steps were tested on 8th Dec 2018; latest versions of Mastodon was "v2.6.5", of Ruby was "2.5.3", of yarn was "1.12.3".
 
-Official Installaton Documentation; https://docs.joinmastodon.org/administration/installation/#install-fail2ban-so-it-blocks-repeated-login-attempts)  
+Official Installaton Documentation; <https://docs.joinmastodon.org/administration/installation/#install-fail2ban-so-it-blocks-repeated-login-attempts>
 
 
-# Before run install-mastodon-part1.sh  
+# First of all
 
 ## Create user "mastodon"
 ```
@@ -19,7 +21,7 @@ su - mastodon
 ```
 export INSTANCE=YOURINSTANCEDOMAIN  
 ```  
-# Run the script  
+# Run the script part1 
 ```
 ./install-mastodon-part1.sh
 ```
@@ -28,7 +30,14 @@ export INSTANCE=YOURINSTANCEDOMAIN
 This script sometimes opens vim and needs to edit some files mannually.
 
 ### Extend swapfile
-Change value of `CONF_SWAPSIZE`, `100` --> `2048`   
+Change value of `CONF_SWAPSIZE`, like `100` --> `2048`   
+
+# Run part2 
+```
+./install-mastodon-part2.sh
+```
+## NOTICE
+**Part2 takes A LOT time. Maybe it will take 3 hours.**  
 
 ## During running part2
 ### Setting up PostgreSQL
