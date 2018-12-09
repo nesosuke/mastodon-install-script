@@ -4,7 +4,7 @@
 #Official Installaton Documentation; https://docs.joinmastodon.org/administration/installation/#install-fail2ban-so-it-blocks-repeated-login-attempts)
 
 # Set Your Instance Name
-export INSTANCE=m.rpi-zero01.local
+export INSTANCE=YOURINSTANCEDOMAIN
 
 
 # Install curl
@@ -79,10 +79,16 @@ cd && git clone https://github.com/tootsuite/mastodon.git live
 cd live
 git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
 
+# Install the dependencies
+bundle install \
+  -j$(getconf _NPROCESSORS_ONLN) \
+  --deployment --without development test
+yarn install --pure-lockfile --network-timeout 100000
+
 # Set up nginx
 cp /home/mastodon/live/dist/nginx.conf /etc/nginx/sites-available/$INSTANCE.conf
 ln -s /etc/nginx/sites-available/$INSTANCE.conf /etc/nginx/sites-enabled/$INSTANCE.conf
-sudo vim /etc/nginx/sites-available/$INSTANCE
+sudo vim /etc/nginx/sites-available/$INSTANCE.conf
 	# `:s%/example.com/$INSTANCE/g`
 	# uncomment "ssl_certificate" and "ssl_certificate_key"
 sudo systemctl reload nginx
