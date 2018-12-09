@@ -43,6 +43,7 @@ sudo ln -s /etc/nginx/sites-available/$INSTANCE.conf /etc/nginx/sites-enabled/$I
 sudo vim /etc/nginx/sites-available/$INSTANCE.conf
 	# `:s%/example.com/$INSTANCE/g`
 	# uncomment "ssl_certificate" and "ssl_certificate_key"
+sudo unlink /etc/nginx/sites-enabled/default
 sudo systemctl reload nginx
 
 # Set up systemd services
