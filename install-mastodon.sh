@@ -3,9 +3,6 @@
 #These steps below were executed on 8th Dec 2018; latest versions of Mastodon was "v2.6.5", of Ruby was "2.5.3", of yarn was "1.12.3".
 #Official Installaton Documentation; https://docs.joinmastodon.org/administration/installation/#install-fail2ban-so-it-blocks-repeated-login-attempts)
 
-# Set Your Instance Name
-export INSTANCE=YOURINSTANCEDOMAIN
-
 
 # Install curl
 sudo apt update
@@ -19,10 +16,6 @@ sudo vim /etc/dphys-swapfile
 	# "CONF_SWAPSIZE": 100-->2048
 sudo systemctl restart dphys-swapfile
 
-# Create user "mastodon"
-sudo adduser mastodon
-sudo adduser mastodon sudo 
-su - mastodon
 
 # If error occured, check the latest version at https://nodejs.org/dist/latest-v8.x/
 wget https://nodejs.org/dist/latest-v8.x/node-v8.14.0-linux-armv6l.tar.gz
