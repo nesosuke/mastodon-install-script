@@ -5,7 +5,7 @@ rbenv install 2.5.3
 rbenv global 2.5.3
 
 # Obtain&Install SSL cert
-git clone https://github.com/letsencrypt/letsencrypt ~/git/letsencrypt
+cd && git clone https://github.com/letsencrypt/letsencrypt ~/git/letsencrypt
 git/letsencrypt/letsencrypt-auto
 git/letsencrypt/letsencrypt-auto -d $INSTANCE
 
@@ -22,7 +22,7 @@ sudo -u postgres psql
 
 
 # Download Mastodon from github 
-cd && git clone https://github.com/tootsuite/mastodon.git live
+git clone https://github.com/tootsuite/mastodon.git live
 cd live
 git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
 
