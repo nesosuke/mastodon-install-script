@@ -19,6 +19,7 @@ sudo systemctl restart dphys-swapfile
 wget https://nodejs.org/dist/latest-v8.x/node-v8.14.0-linux-armv6l.tar.gz
 tar -zxvf node-v8.14.0-linux-armv6l.tar.gz
 sudo cp -R node-v8.14.0-linux-armv6l/* /usr/local/
+sudo ln -s /usr/local/bin/npm /usr/bin/npm
 
 # If the versions are printed, installation of node & npm has been succeeded.
 node -v
