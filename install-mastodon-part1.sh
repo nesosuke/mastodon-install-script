@@ -27,7 +27,7 @@ npm -v
 ### Notice: Above steps are almost the same as the official documentation. 
 
 # Install yarn
-sudo npm install yarn 
+sudo npm install -g yarn 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 yarn -v

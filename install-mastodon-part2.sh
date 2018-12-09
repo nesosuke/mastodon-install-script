@@ -32,9 +32,14 @@ bundle install \
   --deployment --without development test
 yarn install --pure-lockfile --network-timeout 100000
 
+# Set up Mastodon
+cd ~/live 
+RAILS_ENV=production bundle exec rake mastodon:setup
+
+
 # Set up nginx
-cp /home/mastodon/live/dist/nginx.conf /etc/nginx/sites-available/$INSTANCE.conf
-ln -s /etc/nginx/sites-available/$INSTANCE.conf /etc/nginx/sites-enabled/$INSTANCE.conf
+sudo cp /home/mastodon/live/dist/nginx.conf /etc/nginx/sites-available/$INSTANCE.conf
+sudo ln -s /etc/nginx/sites-available/$INSTANCE.conf /etc/nginx/sites-enabled/$INSTANCE.conf
 sudo vim /etc/nginx/sites-available/$INSTANCE.conf
 	# `:s%/example.com/$INSTANCE/g`
 	# uncomment "ssl_certificate" and "ssl_certificate_key"
