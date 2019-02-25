@@ -16,9 +16,10 @@ sudo systemctl restart dphys-swapfile
 
 
 # If error occured, check the latest version at https://nodejs.org/dist/latest-v8.x/
-wget https://nodejs.org/dist/latest-v8.x/node-v8.14.0-linux-armv6l.tar.gz
-tar -zxvf node-v8.14.0-linux-armv6l.tar.gz
-sudo cp -R node-v8.14.0-linux-armv6l/* /usr/local/
+#wget https://nodejs.org/dist/latest-v8.x/node-v8.15.0-linux-armv6l.tar.gz
+wget https://nodejs.org/dist/latest-v8.x/node-v8.15.0-linux-x64.tar.gz
+tar -zxvf node-v8.*.tar.gz
+sudo cp -R node-v8.*/* /usr/local/
 sudo ln -s /usr/local/bin/npm /usr/bin/npm
 
 # If the versions are printed, installation of node & npm has been succeeded.
@@ -52,3 +53,4 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 echo 'run install-mastodon-part2.sh'
 exec bash
+cd ~/git/mastodon-install-script

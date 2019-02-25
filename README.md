@@ -54,6 +54,6 @@ Ane then, uncomment `ssl_certificate` and `ssl_certificate_key`
 
 In Vim, Replacing is easy by using below command
 ```
-:s%/example.com/YOURDOMAIN/g
+:%s/example.com/YOURDOMAIN/g
 ```
 
