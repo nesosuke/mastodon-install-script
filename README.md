@@ -57,3 +57,7 @@ In Vim, Replacing is easy by using below command
 :%s/example.com/YOURDOMAIN/g
 ```
 
+At last, run mastodon:setup  
+```
+RAILS_ENV=producrion bundle exec rake mastodon:setup
+```
