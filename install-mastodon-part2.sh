@@ -49,4 +49,4 @@ sudo systemctl reload nginx
 # Set up systemd services
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
 sudo systemctl start mastodon-web mastodon-sidekiq mastodon-streaming
-#sudo systemctl enable mastodon-*
+sudo systemctl enable mastodon-web.service mastodon-streaming.service mastodon-sidekiq.service
