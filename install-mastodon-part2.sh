@@ -1,8 +1,8 @@
 #!/bin/sh
 # Resume installing ruby  
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-rbenv install 2.5.3 
-rbenv global 2.5.3
+rbenv install 2.6.0 
+rbenv global 2.6.0 
 
 # Obtain&Install SSL cert
 cd && git clone https://github.com/letsencrypt/letsencrypt ~/git/letsencrypt
