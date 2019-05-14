@@ -17,7 +17,7 @@ sudo systemctl restart dphys-swapfile
 
 # If error occured, check the latest version at https://nodejs.org/dist/latest-v8.x/
 #wget https://nodejs.org/dist/latest-v8.x/node-v8.15.0-linux-armv6l.tar.gz
-wget https://nodejs.org/dist/latest-v8.x/node-v8.15.0-linux-x64.tar.gz
+wget https://nodejs.org/dist/latest-v8.x/node-v8.16.0-linux-x64.tar.gz
 tar -zxvf node-v8.*.tar.gz
 sudo cp -R node-v8.*/* /usr/local/
 sudo ln -s /usr/local/bin/npm /usr/bin/npm
