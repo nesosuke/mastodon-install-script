@@ -38,12 +38,10 @@ RAILS_ENV=production bundle exec rake mastodon:setup
 
 
 # Set up nginx
-sudo cp /home/mastodon/live/dist/nginx.conf /etc/nginx/sites-available/$INSTANCE.conf
-sudo ln -s /etc/nginx/sites-available/$INSTANCE.conf /etc/nginx/sites-enabled/$INSTANCE.conf
-sudo vim /etc/nginx/sites-available/$INSTANCE.conf
+sudo cp /home/mastodon/live/dist/nginx.conf /etc/nginx/conf.d/$INSTANCE.conf
+sudo vim /etc/nginx/conf.d/$INSTANCE.conf
 	# `:s%/example.com/$INSTANCE/g`
 	# uncomment "ssl_certificate" and "ssl_certificate_key"
-sudo unlink /etc/nginx/sites-enabled/default
 sudo systemctl reload nginx
 
 # Set up systemd services
