@@ -52,5 +52,4 @@ cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 echo 'run install-mastodon-part2.sh'
-exec bash
 cd ~/git/mastodon-install-script
