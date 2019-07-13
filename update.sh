@@ -16,7 +16,7 @@ git checkout $MASTODON_VERSION
 # Conf values 
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true
 RAILS_ENV=production
-RUBY_VERSION=$(echo ~/live/.ruby_version)
+RUBY_VERSION=$(cat ~/live/.ruby_version)
 
 
 # Update pkg(s) 

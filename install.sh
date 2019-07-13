@@ -17,7 +17,7 @@ sudo adduser mastodon sudo
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
 git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
-export Ruby_version=$(echo ~/live/.ruby_version)
+export Ruby_version=$(cat ~/live/.ruby_version)
  
 
 set -e
