@@ -17,7 +17,6 @@ sudo adduser mastodon sudo
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
 git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
-export Ruby_version=$(cat ~/live/.ruby_version)
  
 
 set -e
@@ -29,7 +28,7 @@ cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
-rbenv install $Ruby_version &
+rbenv install $(cat ~/live/.ruby_version) &
 
 
 # Install packages
@@ -62,7 +61,7 @@ echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 
 # Setup Mastodon 
 wait
-rbenv global $Ruby_version
+rbenv global $(cat ~/live/.ruby_version)
 gem install bundler
 bundle install \
   -j$(getconf _NPROCESSORS_ONLN) \
