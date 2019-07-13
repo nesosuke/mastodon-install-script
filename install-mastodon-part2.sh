@@ -1,14 +1,11 @@
 #!/bin/sh
 # Resume installing ruby  
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-rbenv install 2.6.1 
-rbenv global 2.6.1
+#git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+rbenv install 2.6.3 
+rbenv global 2.6.3
 
 # Obtain&Install SSL cert
-cd && git clone https://github.com/letsencrypt/letsencrypt ~/git/letsencrypt
-git/letsencrypt/letsencrypt-auto
-git/letsencrypt/letsencrypt-auto -d $INSTANCE
-
+#sudo certbot --nginx -d $INSTANCE
 # Install bundler 
 gem install bundler --no-ri --no-rdoc
 

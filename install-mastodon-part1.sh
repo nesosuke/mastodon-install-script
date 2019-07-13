@@ -1,11 +1,11 @@
 #!/bin/sh
 
-cd $HOME
+cd ~
 
 # Install curl
 sudo apt update
 sudo apt upgrade
-sudo apt install git vim curl
+sudo apt install -f git vim curl npm
 	# Install more pkgs, if you need
 	# `sudo apt install 
 
@@ -17,10 +17,10 @@ sudo systemctl restart dphys-swapfile
 
 # If error occured, check the latest version at https://nodejs.org/dist/latest-v8.x/
 #wget https://nodejs.org/dist/latest-v8.x/node-v8.15.0-linux-armv6l.tar.gz
-wget https://nodejs.org/dist/latest-v8.x/node-v8.16.0-linux-x64.tar.gz
-tar -zxvf node-v8.*.tar.gz
-sudo cp -R node-v8.*/* /usr/local/
-sudo ln -s /usr/local/bin/npm /usr/bin/npm
+#wget https://nodejs.org/dist/latest-v8.x/node-v8.16.0-linux-x64.tar.gz
+#tar -zxvf node-v8.*.tar.gz
+#sudo cp -R node-v8.*/* /usr/local/
+#sudo ln -s /usr/local/bin/npm /usr/bin/npm
 
 # If the versions are printed, installation of node & npm has been succeeded.
 node -v
@@ -43,13 +43,14 @@ sudo apt install -y \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
   nginx redis-server redis-tools postgresql postgresql-contrib \
-  letsencrypt libidn11-dev libicu-dev libjemalloc-dev
+  libidn11-dev libicu-dev libjemalloc-dev rbenv
 
 # Install rbenv and rbenv-build 
 # `rbenv install` will take a lot of time. Drink some tea.
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-cd ~/.rbenv && src/configure && make -C src
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+#rm -rf ~/.rbenv
+#git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+#cd ~/.rbenv && src/configure && make -C src
+#echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+#echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 echo 'run install-mastodon-part2.sh'
 cd ~/git/mastodon-install-script
