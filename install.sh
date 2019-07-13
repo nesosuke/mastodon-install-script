@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 # Input server domain
 read -p "Input your server domain w/o \"http\"; e.g. example.com : " INSTANCE
 
