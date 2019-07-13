@@ -16,15 +16,14 @@ git checkout $MASTODON_VERSION
 # Conf values 
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true
 RAILS_ENV=production
-RUBY_VERSION=$(cat ~/live/.ruby_version)
 
 
 # Update pkg(s) 
 sudo apt update -y 
 sudo apt upgrade -y 
 cd ~/.rbenv/plugins/ruby-build && git pull 
-rbenv install $RUBY_VERSION
-rbenv global $RUBY_VERSION
+rbenv install $(cat ~/live/.ruby_version)
+rbenv global $(cat ~/live/.ruby_version)
 cd ~/live
 gem update --system
 gem install bundler 
