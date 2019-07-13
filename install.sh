@@ -2,19 +2,25 @@
 
 ## Input server domain
 read -p "Input your server domain w/o \"http\"; e.g. example.com" INSTANCE
-## Prepare
-sudo apt install -y screen 
 
+
+## Prepare
+sudo adduser mastodon 
+sudo adduser mastodon sudo 
+sudo apt install -y screen
+
+install_mastodon()
+{
 
 ## Install Ruby and gem
 rm -rf ~/.rbenv
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 screen -S install_ruby_263 -d -m rbenv install 2.6.3 
-
 
 
 ## Install packages
@@ -40,6 +46,7 @@ yarn -v
 ## Setup PostgreSQL
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 
+
 ## Setup Mastodon 
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
@@ -54,6 +61,7 @@ yarn install --pure-lockfile --network-timeout 100000
 read -p "Press ENTER to run mastodon:setup"
 RAILS_ENV=production bundle exec rake mastodon:setup
 
+
 ## Set up nginx
 cp ~/live/dist/nginx.conf ~/live/dist/nginx.conf.original
 sed -i ~/live/dist/nginx.conf -e "s/example.com/$INSTANCE/g"
@@ -62,9 +70,13 @@ sudo cp ~/live/dist/nginx.conf /etc/nginx/conf.d/$INSTANCE.conf
 sudo vim /etc/nginx/conf.d/$INSTANCE.conf
 sudo systemctl restart nginx
 
+
 ## Set up systemd services
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
 sudo systemctl start mastodon-web mastodon-sidekiq mastodon-streaming
 sudo systemctl enable mastodon-web.service mastodon-streaming.service mastodon-sidekiq.service
 
+}
+
+sudo -u mastodon install_mastodon
 
