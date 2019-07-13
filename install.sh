@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Input server domain
-read -p "Input your server domain w/o \"http\"; e.g. example.com" INSTANCE
+read -p "Input your server domain w/o \"http\"; e.g. example.com : " INSTANCE
 
 
 ## Prepare
@@ -20,7 +20,7 @@ cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
-screen -S install_ruby_263 -d -m rbenv install 2.6.3 
+rbenv install 2.6.3 &
 
 
 ## Install packages
@@ -51,6 +51,7 @@ echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
 git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
+wait
 rbenv global 2.6.3 
 gem install bundler --no-ri --no-rdoc
 gem install bundler
