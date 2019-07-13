@@ -1,8 +1,6 @@
 #!/bin/bash
 # Input server domain
 
-Ruby_version=2.6.3
-
 read -p "Input your server domain w/o \"http\"; e.g. example.com > " INSTANCE
 read -p "Obtain SSL Cert ? [y/N] > " ANSWER_SSL_CERT
 
@@ -16,6 +14,11 @@ fi
 # Prepare
 sudo adduser mastodon 
 sudo adduser mastodon sudo 
+git clone https://github.com/tootsuite/mastodon.git ~/live
+cd ~/live
+git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
+export Ruby_version=$(echo ~/live/.ruby_version)
+ 
 
 set -e
 # Install Ruby and gem
@@ -58,27 +61,26 @@ fi
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 
 # Setup Mastodon 
-git clone https://github.com/tootsuite/mastodon.git ~/live
-cd ~/live
-git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
-wait 
-rbenv global $Ruby_version 
-gem install bundler --no-ri --no-rdoc
+wait
+rbenv global $Ruby_version
 gem install bundler
 bundle install \
   -j$(getconf _NPROCESSORS_ONLN) \
   --deployment --without development test
 yarn install --pure-lockfile --network-timeout 100000
-read -p "Press ENTER to run mastodon:setup"
 RAILS_ENV=production bundle exec rake mastodon:setup
 
 
 # Set up nginx
 cp ~/live/dist/nginx.conf ~/live/dist/nginx.conf.original
 sed -i ~/live/dist/nginx.conf -e "s/example.com/$INSTANCE/g"
-sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
+if ["$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
+then 
+  sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
+else
+  echo ""
+fi
 sudo cp ~/live/dist/nginx.conf /etc/nginx/conf.d/$INSTANCE.conf
-sudo vim /etc/nginx/conf.d/$INSTANCE.conf
 sudo systemctl restart nginx
 
 # Set up systemd services
