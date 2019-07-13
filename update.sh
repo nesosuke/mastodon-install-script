@@ -8,7 +8,7 @@
 
 # Pull Mastodon 
 cd ~/live && git pull 
-echo ""
+echo $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 5)
 read -p "Set Mastodon version updating to > " MASTODON_VERSION
 git checkout $MASTODON_VERSION
 
