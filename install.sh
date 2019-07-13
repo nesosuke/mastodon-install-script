@@ -13,7 +13,6 @@ fi
 # Prepare
 sudo adduser mastodon 
 sudo adduser mastodon sudo 
-sudo apt install -y screen
 
 set -e
 # Install Ruby and gem
