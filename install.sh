@@ -9,7 +9,7 @@ sudo adduser mastodon
 sudo adduser mastodon sudo 
 sudo apt install -y screen
 
-function install_mastodon() {
+install_mastodon() {
 
 ## Install Ruby and gem
 rm -rf ~/.rbenv
