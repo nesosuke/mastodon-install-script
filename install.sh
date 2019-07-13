@@ -1,5 +1,8 @@
 #!/bin/bash
 # Input server domain
+
+Ruby_version=2.6.3
+
 read -p "Input your server domain w/o \"http\"; e.g. example.com > " INSTANCE
 read -p "Obtain SSL Cert ? [y/N] > " ANSWER_SSL_CERT
 
@@ -23,7 +26,7 @@ cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
-rbenv install 2.6.3 &
+rbenv install $Ruby_version &
 
 
 # Install packages
@@ -59,7 +62,7 @@ git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
 git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
 wait 
-rbenv global 2.6.3 
+rbenv global $Ruby_version 
 gem install bundler --no-ri --no-rdoc
 gem install bundler
 bundle install \
