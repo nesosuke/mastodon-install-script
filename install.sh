@@ -45,9 +45,6 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 # Obtain SSL Cert
-sudo ufw enable 
-sudo ufw allow 80
-sudo ufw allow 443
 if ["$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
 then 
   sudo certbot certonly -d $INSTANCE -m $EMAIL -n --nginx --agree-tos
