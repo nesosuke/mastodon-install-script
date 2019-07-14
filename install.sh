@@ -2,9 +2,9 @@
 # Input server domain
 
 read -p "Input your server domain w/o \"http\"; e.g. example.com > " INSTANCE
-read -p "Obtain SSL Cert ? [y/N] > " ANSWER_SSL_CERT
+read -p "Obtain SSL Cert ? [ y/N] > " ANSWER_SSL_CERT
 
-if ["$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
+if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
 then 
   read -p "Input your mail adress > " EMAIL
 else 
@@ -16,7 +16,7 @@ sudo adduser mastodon
 sudo adduser mastodon sudo 
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
-git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
+git checkout $(git tag -l | grep -v 'rc[ 0-9]*$' | sort -V | tail -n 1)
  
 
 set -e
@@ -50,7 +50,7 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 # Obtain SSL Cert
-if ["$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
+if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
 then 
   sudo certbot certonly -d $INSTANCE -m $EMAIL -n --nginx --agree-tos
 else 
@@ -73,7 +73,7 @@ RAILS_ENV=production bundle exec rake mastodon:setup
 # Set up nginx
 cp ~/live/dist/nginx.conf ~/live/dist/nginx.conf.original
 sed -i ~/live/dist/nginx.conf -e "s/example.com/$INSTANCE/g"
-if ["$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
+if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
 then 
   sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
 else
