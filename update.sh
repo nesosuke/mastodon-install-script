@@ -14,8 +14,8 @@ git checkout  $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
 sudo apt update -y 
 sudo apt upgrade -y 
 cd ~/.rbenv/plugins/ruby-build && git pull 
-rbenv install $(cat ~/live/.ruby_version)
-rbenv global $(cat ~/live/.ruby_version)
+rbenv install $(cat ~/live/.ruby-version)
+rbenv global $(cat ~/live/.ruby-version)
 cd ~/live
 gem update --system
 gem install bundler 
