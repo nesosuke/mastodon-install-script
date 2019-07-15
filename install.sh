@@ -1,8 +1,7 @@
 #!/bin/bash
 # Input server domain
-
-read -p "Input your server domain w/o \"http\"; e.g. example.com > " INSTANCE
-read -p "Obtain SSL Cert ? [ y/N] > " ANSWER_SSL_CERT
+read -p "Input your server domain w/o \"http\" (e.g. mstnd.example.com) > " INSTANCE
+read -p "Obtain SSL Cert ? [y/N] > " ANSWER_SSL_CERT
 
 if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
 then 
@@ -11,16 +10,14 @@ else
   echo ""
 fi
 
-# Prepare
-sudo adduser mastodon 
-sudo adduser mastodon sudo 
+# Clone Mastodon
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
 git checkout $(git tag -l | grep -v 'rc[ 0-9]*$' | sort -V | tail -n 1)
  
 
 set -e
-# Install Ruby and gem
+# Install Ruby and gem(s)
 rm -rf ~/.rbenv
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
