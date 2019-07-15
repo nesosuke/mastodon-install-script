@@ -55,10 +55,10 @@ else
   echo ""
 fi 
 # Setup PostgreSQL
+wait
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 
 # Setup Mastodon 
-wait
 rbenv global $(cat ~/live/.ruby_version)
 gem install bundler
 bundle install \
