@@ -1,7 +1,7 @@
 # TL;DR  
 Mastodon自鯖勢増えろ～というやつ.  
 
-https://github.com/nesosuke/mastodon-install-script
+<https://github.com/nesosuke/mastodon-install-script>
 
 - install.sh : 構築に使う  
 - update.sh  : アップデートするのに使う  
@@ -10,6 +10,9 @@ https://github.com/nesosuke/mastodon-install-script
 
 ## 検証環境  
 Debian 10 on VirtualBox
+
+公式インストールガイドはこっち
+<https://docs.joinmastodon.org/administration/installation/>  
 
 ---  
 # 構築
