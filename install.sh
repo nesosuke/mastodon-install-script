@@ -33,7 +33,7 @@ rbenv install $(cat ~/live/.ruby-version) &
 
 
 # Install packages
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt install -y npm ufw
 sudo apt install -y \
   imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
