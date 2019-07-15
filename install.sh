@@ -13,7 +13,7 @@ fi
 # Clone Mastodon
 sudo apt update
 sudo apt upgrade
-sudo apt install -y git curl
+sudo apt install -y git curl ufw
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
 git checkout $(git tag -l | grep -v 'rc[ 0-9]*$' | sort -V | tail -n 1)
@@ -33,7 +33,7 @@ rbenv install $(cat ~/live/.ruby-version) &
 
 
 # Install packages
-sudo apt install -y npm
+sudo apt install -y npm ufw
 sudo apt install -y \
   imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
@@ -42,6 +42,13 @@ sudo apt install -y \
   redis-server redis-tools postgresql postgresql-contrib \
   libidn11-dev libicu-dev libjemalloc-dev nginx &
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
+
+
+# Setup ufw
+printf y | sudo ufw enable
+sudo ufw allow 80
+sudo ufw allow 443
+
 
 # Install yarn
 sudo npm install -g yarn 
