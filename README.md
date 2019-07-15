@@ -8,8 +8,9 @@ Mastodon自鯖勢増えろ～というやつ.
 
 (注)どちらも`mastodon`ユーザーで実行すること  
 
-## 検証環境  
-Debian 10 on VirtualBox
+## 環境  
+Debian 10 on VirtualBox  
+Debian 9.7 on ConoHa VPS  
 
 公式インストールガイドはこっち
 <https://docs.joinmastodon.org/administration/installation/>  
