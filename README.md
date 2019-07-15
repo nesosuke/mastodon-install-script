@@ -21,12 +21,11 @@ Debian 10 on VirtualBox
   ```  
   sudo adduser mastodon
   sudo adduser mastodon sudo
-  su mastodon 
   ``` 
 
 ## `install.sh`を実行.  
   ```  
-  sudo bash install.sh
+  sudo -u mastodon bash install.sh
   ```  
 
 ## サーバードメインの指定
