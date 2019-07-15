@@ -28,7 +28,7 @@ cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
-rbenv install $(cat ~/live/.ruby_version) &
+rbenv install $(cat ~/live/.ruby-version) &
 
 
 # Install packages
@@ -61,7 +61,7 @@ wait
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 
 # Setup Mastodon 
-rbenv global $(cat ~/live/.ruby_version)
+rbenv global $(cat ~/live/.ruby-version)
 gem install bundler
 bundle install \
   -j$(getconf _NPROCESSORS_ONLN) \
