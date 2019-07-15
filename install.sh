@@ -22,7 +22,6 @@ git checkout $(git tag -l | grep -v 'rc[ 0-9]*$' | sort -V | tail -n 1)
 set -e
 # Install Ruby and gem(s)
 rm -rf ~/.rbenv
-source ~/.bashrc
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 cd ~/.rbenv && src/configure && make -C src
