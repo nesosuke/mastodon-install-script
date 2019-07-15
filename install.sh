@@ -72,6 +72,7 @@ set -e
 
 # Setup Mastodon 
 rbenv global $(cat ~/live/.ruby-version)
+cd ~/live
 gem install bundler
 bundle install \
   -j$(getconf _NPROCESSORS_ONLN) \
