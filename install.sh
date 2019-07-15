@@ -58,7 +58,9 @@ else
 fi 
 # Setup PostgreSQL
 wait
+set +e
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
+set -e 
 
 # Setup Mastodon 
 rbenv global $(cat ~/live/.ruby-version)
