@@ -11,8 +11,8 @@ else
 fi
 
 # Clone Mastodon
-sudo apt update
-sudo apt upgrade
+sudo apt update 
+sudo apt upgrade -y
 sudo apt install -y git curl ufw
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
