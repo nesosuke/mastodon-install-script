@@ -22,17 +22,18 @@ git checkout $(git tag -l | grep -v 'rc[ 0-9]*$' | sort -V | tail -n 1)
 set -e
 # Install Ruby and gem(s)
 rm -rf ~/.rbenv
+source ~/.bashrc
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 rbenv install $(cat ~/live/.ruby-version) &
 
 
 # Install packages
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt install -y npm ufw
 sudo apt install -y \
   imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
