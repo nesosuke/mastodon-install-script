@@ -27,8 +27,7 @@ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-source ~/.bashrc
-rbenv install $(cat ~/live/.ruby-version) &
+source ~/.bashrc && rbenv install $(cat ~/live/.ruby-version) &
 
 
 # Install packages
