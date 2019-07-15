@@ -11,6 +11,9 @@ else
 fi
 
 # Clone Mastodon
+sudo apt update
+sudo apt upgrade
+sudo apt install -y git curl
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
 git checkout $(git tag -l | grep -v 'rc[ 0-9]*$' | sort -V | tail -n 1)
@@ -29,9 +32,7 @@ rbenv install $(cat ~/live/.ruby_version) &
 
 
 # Install packages
-sudo apt update
-sudo apt upgrade
-sudo apt install -y git vim curl npm ufw
+sudo apt install -y npm
 sudo apt install -y \
   imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
