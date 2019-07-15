@@ -75,7 +75,7 @@ if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
 then 
   sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
 else
-  echo ""
+  echo "なにもしないをしている" > /dev/null
 fi
 sudo cp ~/live/dist/nginx.conf /etc/nginx/conf.d/$INSTANCE.conf
 sudo systemctl restart nginx
