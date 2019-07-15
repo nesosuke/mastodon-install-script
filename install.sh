@@ -39,7 +39,7 @@ sudo apt install -y \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
   redis-server redis-tools postgresql postgresql-contrib \
-  libidn11-dev libicu-dev libjemalloc-dev nginx certbot python-certbot-nginx &
+  libidn11-dev libicu-dev libjemalloc-dev nginx &
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
 
 # Install yarn
@@ -50,9 +50,11 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 # Obtain SSL Cert
 if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
 then 
+  sudo apt install certbot python-certbot-nginx 
   sudo certbot certonly -d $INSTANCE -m $EMAIL -n --nginx --agree-tos
+  echo "@daily certbot renew --renew-hook \"service nginx restart\"" | sudo tee -a /etc/cron.d/certbot-renew 
 else 
-  echo ""
+  echo "nothing" > /dev/null
 fi 
 # Setup PostgreSQL
 wait
