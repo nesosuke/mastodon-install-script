@@ -8,7 +8,7 @@ Mastodon自鯖勢増えろ～というやつ.
 
 (注)どちらも`mastodon`ユーザーで実行すること  
 
-## 環境  
+## 検証環境  
 Debian 10 on VirtualBox  
 Debian 9.7 on ConoHa VPS  
 
