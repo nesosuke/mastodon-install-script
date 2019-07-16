@@ -1,5 +1,6 @@
 # TL;DR  
 Mastodon自鯖勢増えろ～というやつ.  
+Mastodon本体の設定を入力する場面以外はほとんど手放しで構築できるようにしました．  
 
 <https://github.com/nesosuke/mastodon-install-script>
 
