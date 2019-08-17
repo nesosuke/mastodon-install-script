@@ -6,9 +6,9 @@ SKIP_POST_DEPLOYMENT_MIGRATIONS=true
 
 # Pull Mastodon 
 cd ~/live   
-#git pull
-git fetch 
-git checkout  $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1) 
+git pull
+#git fetch 
+#git checkout  $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1) 
 
 
 # Update pkg(s) 
