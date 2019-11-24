@@ -10,8 +10,9 @@ Mastodon本体の設定を入力する場面以外はほとんど手放しで構
 (注)どちらも`mastodon`ユーザーで実行すること  
 
 ## 検証環境  
-Debian 10 on VirtualBox  
+Debian 10 on VirtualBox 
 Debian 9.7 on ConoHa VPS  
+Ubuntu 19.10 on VirtualBox
 
 公式インストールガイドはこっち
 <https://docs.joinmastodon.org/administration/installation/>  
