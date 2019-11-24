@@ -16,7 +16,6 @@ sudo apt upgrade -y
 sudo apt install -y git curl ufw
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
-git checkout $(git tag -l | grep -v 'rc[ 0-9]*$' | sort -V | tail -n 1)
  
 
 set -e
@@ -30,11 +29,11 @@ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc 
 export  PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-rbenv install $(cat ~/live/.ruby-version) &
+rbenv install $(cat ~/live/.ruby-version) 
 
 
 # Install packages
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install -y npm ufw
 sudo apt install -y \
   imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
