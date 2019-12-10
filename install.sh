@@ -91,11 +91,10 @@ else
   echo "なにもしないをしている" > /dev/null
 fi
 sudo cp ~/live/dist/nginx.conf /etc/nginx/conf.d/$INSTANCE.conf
-sudo systemctl restart nginx
 
 # Set up systemd services
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
-sudo systemctl start mastodon-web mastodon-sidekiq mastodon-streaming
-sudo systemctl enable mastodon-web.service mastodon-streaming.service mastodon-sidekiq.service
+sudo systemctl enable --now mastodon-web.service mastodon-streaming.service mastodon-sidekiq.service
+sudo systemctl restart nginx.service
 
 
