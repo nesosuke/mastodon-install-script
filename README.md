@@ -2,6 +2,9 @@
 Mastodon自鯖勢増えろ～というやつ.  
 Mastodon本体の設定を入力する場面以外はほとんど手放しで構築できるようにしました．  
 
+Mastodon本家
+→ <https://github.com/tootsuite/mastodon>
+
 <https://github.com/nesosuke/mastodon-install-script>
 
 - install.sh : 構築に使う  
