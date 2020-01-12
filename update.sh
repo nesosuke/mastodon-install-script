@@ -21,7 +21,7 @@ cd ~/live
 gem update --system
 gem install bundler 
 bundle install 
-yarn install 
+sudo yarn install 
 
 
 # Migrate  
