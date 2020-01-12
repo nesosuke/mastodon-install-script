@@ -16,8 +16,19 @@ sudo apt upgrade -y
 sudo apt install -y git curl ufw
 git clone https://github.com/tootsuite/mastodon.git ~/live
 cd ~/live
-git checkout $(git tag -l | grep -v 'rc[ 0-9]*$' | sort -V | tail -n 1)
- 
+
+# Install packages
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt install -y npm ufw
+sudo apt install -y \
+  imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
+  g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
+  bison build-essential libssl-dev libyaml-dev libreadline6-dev \
+  zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
+  redis-server redis-tools postgresql postgresql-contrib \
+  libidn11-dev libicu-dev libjemalloc-dev nginx 
+## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
+
 
 set -e
 # Install Ruby and gem(s)
@@ -30,20 +41,7 @@ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc 
 export  PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-rbenv install $(cat ~/live/.ruby-version) &
-
-
-# Install packages
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt install -y npm ufw
-sudo apt install -y \
-  imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
-  g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
-  bison build-essential libssl-dev libyaml-dev libreadline6-dev \
-  zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
-  redis-server redis-tools postgresql postgresql-contrib \
-  libidn11-dev libicu-dev libjemalloc-dev nginx 
-## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
+rbenv install $(cat ~/live/.ruby-version) 
 
 
 # Setup ufw
@@ -93,11 +91,10 @@ else
   echo "なにもしないをしている" > /dev/null
 fi
 sudo cp ~/live/dist/nginx.conf /etc/nginx/conf.d/$INSTANCE.conf
-sudo systemctl restart nginx
 
 # Set up systemd services
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
-sudo systemctl start mastodon-web mastodon-sidekiq mastodon-streaming
-sudo systemctl enable mastodon-web.service mastodon-streaming.service mastodon-sidekiq.service
+sudo systemctl enable --now mastodon-web.service mastodon-streaming.service mastodon-sidekiq.service
+sudo systemctl restart nginx.service
 
 

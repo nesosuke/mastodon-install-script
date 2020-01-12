@@ -2,6 +2,9 @@
 Mastodon自鯖勢増えろ～というやつ.  
 Mastodon本体の設定を入力する場面以外はほとんど手放しで構築できるようにしました．  
 
+Mastodon本家
+→ <https://github.com/tootsuite/mastodon>
+
 <https://github.com/nesosuke/mastodon-install-script>
 
 - install.sh : 構築に使う  
@@ -12,6 +15,7 @@ Mastodon本体の設定を入力する場面以外はほとんど手放しで構
 ## 検証環境  
 Debian 10 on VirtualBox  
 Debian 9.7 on ConoHa VPS  
+Ubuntu 19.10 on VirtualBox  
 
 公式インストールガイドはこっち
 <https://docs.joinmastodon.org/administration/installation/>  
