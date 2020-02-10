@@ -10,6 +10,8 @@ git pull
 #git fetch 
 #git checkout  $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1) 
 
+# Reget Yarnpkg pubkey
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 
 # Update pkg(s) 
 sudo apt update -y 
