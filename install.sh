@@ -10,6 +10,10 @@ else
   echo ""
 fi
 
+# Correct permission ~/.config
+sudo mkdir -p ~/.config
+sudo chown mastodon:mastodon ~/.config
+
 # Debian Backports
 echo "deb http://deb.debian.org/debian stretch-backports main" | sudo tee -a /etc/apt/source.list 
 
