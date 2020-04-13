@@ -14,9 +14,6 @@ fi
 sudo mkdir -p ~/.config
 sudo chown mastodon:mastodon ~/.config
 
-# Debian Backports
-echo "deb http://deb.debian.org/debian stretch-backports main" | sudo tee -a /etc/apt/source.list 
-
 # Clone Mastodon
 sudo apt update
 sudo apt upgrade -y
@@ -33,10 +30,9 @@ sudo apt install -y \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
    postgresql postgresql-contrib \
-  libidn11-dev libicu-dev libjemalloc-dev nginx 
-sudo apt install -y -t stretch-backports redis-server redis-tools
+  libidn11-dev libicu-dev libjemalloc-dev nginx \
+  redis-server redis-tools
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
-
 
 set -e
 # Install Ruby and gem(s)
