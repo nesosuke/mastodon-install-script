@@ -29,15 +29,16 @@ sudo apt install -y \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
-   postgresql postgresql-contrib \
+  redis-server redis-tools postgresql postgresql-contrib \
   libidn11-dev libicu-dev libjemalloc-dev nginx \
-  redis-server redis-tools
+  
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
 
 set -e
 # Install Ruby and gem(s)
 which rbenv
 if [ $? == 0 ]
+then
   rbenv versions | grep $(cat ~/live/.ruby-version)
   if [ $? == 0 ]
   then
