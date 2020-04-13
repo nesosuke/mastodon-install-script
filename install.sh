@@ -51,7 +51,7 @@ export  PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 rbenv versions | grep $(cat ~/live/.ruby-version)
-if [ $? != 0 ]
+if [ $? == 0 ]
 then
   rbenv global $(cat ~/live/.ruby-version)
 else 
