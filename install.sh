@@ -30,7 +30,7 @@ sudo apt install -y \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
   redis-server redis-tools postgresql postgresql-contrib \
-  libidn11-dev libicu-dev libjemalloc-dev nginx \
+  libidn11-dev libicu-dev libjemalloc-dev nginx
   
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
 
