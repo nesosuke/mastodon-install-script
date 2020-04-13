@@ -1,5 +1,5 @@
 # Mastodon鯖構築支援ｽｸﾘﾋﾟｮ  
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/nesosuke/mastodon-install-script)  
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/nesosuke/mastodon-install-script)[release]  
 
 Mastodon自鯖勢増えろ～というやつ.  
 Mastodon本体の設定を入力する場面以外はほとんど手放しで構築できるようにしました．  
