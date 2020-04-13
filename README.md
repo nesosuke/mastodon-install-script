@@ -1,6 +1,5 @@
 # Mastodon鯖構築支援ｽｸﾘﾋﾟｮ  
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/nesosuke/mastodon-install-script)[releases]  
-
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/nesosuke/mastodon-install-script)][releases]  
 
 [releases]: https://github.com/nesosuke/mastodon-install-script/releases
 
