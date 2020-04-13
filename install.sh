@@ -40,21 +40,23 @@ sudo apt install -y -t stretch-backports redis-server redis-tools
 
 set -e
 # Install Ruby and gem(s)
+rm -rf ~/.rbenv
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+cd ~/.rbenv && src/configure && make -C src
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+source ~/.bashrc 
+export  PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 rbenv versions | grep $(cat ~/live/.ruby-version)
 if [ $? != 0 ]
 then
   rbenv global $(cat ~/live/.ruby-version)
 else 
-  rm -rf ~/.rbenv
-  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-  cd ~/.rbenv && src/configure && make -C src
-  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-  echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-  source ~/.bashrc 
-  export  PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
   rbenv install $(cat ~/live/.ruby-version) 
+  rbenv global $(cat ~/live/.ruby-version)
 fi
 
 # Setup ufw
