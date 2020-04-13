@@ -36,27 +36,17 @@ sudo apt install -y \
 
 set -e
 # Install Ruby and gem(s)
-which rbenv
-if [ "$?" == "0" ]
-then
-  rbenv versions | grep $(cat ~/live/.ruby-version)
-  if [ "$?" == "0" ]
-  then
-    rbenv global $(cat ~/live/.ruby-version)
-  else 
-    rbenv install $(cat ~/live/.ruby-version) 
-    rbenv global $(cat ~/live/.ruby-version)
-  fi
-else
-  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-  cd ~/.rbenv && src/configure && make -C src
-  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-  echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-  source ~/.bashrc 
-  export  PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
+rm -rf ~/.rbenv
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+cd ~/.rbenv && src/configure && make -C src
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+source ~/.bashrc 
+export  PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+rbenv install $(cat ~/live/.ruby-version) 
+rbenv global $(cat ~/live/.ruby-version)
 
 # Setup ufw
 printf y | sudo ufw enable
