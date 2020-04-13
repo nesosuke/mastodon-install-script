@@ -10,6 +10,9 @@ else
   echo ""
 fi
 
+# Debian Backports
+echo "deb http://deb.debian.org/debian stretch-backports main" | sudo tee -a /etc/apt/source.list 
+
 # Clone Mastodon
 sudo apt update
 sudo apt upgrade -y
@@ -25,8 +28,9 @@ sudo apt install -y \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
-  redis-server redis-tools postgresql postgresql-contrib \
+   postgresql postgresql-contrib \
   libidn11-dev libicu-dev libjemalloc-dev nginx 
+sudo apt install -y -t stretch-backports redis-server redis-tools
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
 
 
