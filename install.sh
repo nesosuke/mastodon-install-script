@@ -37,10 +37,10 @@ sudo apt install -y \
 set -e
 # Install Ruby and gem(s)
 which rbenv
-if [ $? == 0 ]
+if [ "$?" == "0" ]
 then
   rbenv versions | grep $(cat ~/live/.ruby-version)
-  if [ $? == 0 ]
+  if [ "$?" == "0" ]
   then
     rbenv global $(cat ~/live/.ruby-version)
   else 
