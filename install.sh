@@ -47,8 +47,6 @@ then
   source ~/.bashrc 
   export  PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
-else
-  :
 fi
 rbenv install $(cat ~/live/.ruby-version) 
 rbenv global $(cat ~/live/.ruby-version)
