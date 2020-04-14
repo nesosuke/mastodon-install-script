@@ -1,7 +1,9 @@
 # Mastodon鯖構築支援ｽｸﾘﾋﾟｮ  
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/nesosuke/mastodon-install-script)][releases]  
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/nesosuke/mastodon-install-script)][releases]
+[![branch update-stable](https://img.shields.io/badge/branch-update--stable-blueviolet)][update-stable]  
 
 [releases]: https://github.com/nesosuke/mastodon-install-script/releases
+[update-stable]: https://github.com/nesosuke/mastodon-install-script/tree/update-stable  
 
 **stableで構築する場合は[`update-stable`](https://github.com/nesosuke/mastodon-install-script/tree/update-stable)ブランチをお使いください。**
 
