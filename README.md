@@ -3,6 +3,8 @@
 
 [releases]: https://github.com/nesosuke/mastodon-install-script/releases
 
+**stableで構築する場合は[`update-stable`](https://github.com/nesosuke/mastodon-install-script/tree/update-stable)ブランチをお使いください。**
+
 Mastodon自鯖勢増えろ～というやつ.  
 Mastodon本体の設定を入力する場面以外はほとんど手放しで構築できるようにしました．  
 
