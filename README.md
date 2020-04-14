@@ -7,26 +7,21 @@
 
 **stableで構築する場合は[`update-stable`](https://github.com/nesosuke/mastodon-install-script/tree/update-stable)ブランチをお使いください。**
 
-Mastodon自鯖勢増えろ～というやつ.  
-Mastodon本体の設定を入力する場面以外はほとんど手放しで構築できるようにしました．  
+## 目的  
+Mastodonサーバーがじゃかじゃか生えてほしいので。  
 
-Mastodon本家
-→ <https://github.com/tootsuite/mastodon>
-
-<https://github.com/nesosuke/mastodon-install-script>
-
+## スクリプトについて  
 - install.sh : 構築に使う  
 - update.sh  : アップデートするのに使う  
 
 (注)どちらも`mastodon`ユーザーで実行すること  
 
-## 検証環境  
-Debian 10 on VirtualBox  
-Debian 9.7 on ConoHa VPS  
-Ubuntu 19.10 on VirtualBox  
+## 動作確認済み環境  
+- Debian 10 on ConoHa VPS
 
-公式インストールガイドはこっち
-<https://docs.joinmastodon.org/administration/installation/>  
+## Mastodon本家について
+- リポジトリ: <https://github.com/tootsuite/mastodon>
+- インストールガイド: <https://docs.joinmastodon.org/administration/installation/>  
 
 ---  
 # 構築
@@ -39,7 +34,9 @@ Ubuntu 19.10 on VirtualBox
 
 ## `install.sh`を実行.  
   ```  
-  sudo -u mastodon bash install.sh
+  su mastodon
+  git clone https://github.com/nesosuke/mastodon-install-script 
+  mastodon-install-script/install.sh
   ```  
 
 ## サーバードメインの指定
@@ -65,8 +62,9 @@ Obtain SSL Cert ? [y/N] と聞かれるので,前項で指定したドメイン�
 1. サーバーから送られるメールについての設定を聞かれる.  
     - アカウントのパスワードを忘れたときや,他のMastodonサーバーからの通報の通知を受けられる.  
     - Enter連打でもMastodonは使えるが設定するべき.  
-    - Mailgunなどがあるが,めんどくさがりのぼくはgmailのアカウントを作ってそこからメールが飛ぶようにしている.
-    - gmailを使う場合, smtp server: `smtp.gmail.com`, user: `<gmailのユーザー名>@gmail.com`, password: `<gmailのパスワード>` を記入しEnter連打. 
+    - Mailgunなどがあるが,gmailアカウントを設定することも可能.
+    - gmailを使う場合, smtp server: `smtp.gmail.com`, user: `<gmailのユーザー名>@gmail.com`, password: `<gmailのパスワード>` を入力.  
+    - smtp authentication: `plain`, verify mode: `none`でもよい.  
     - smtp from address はメールの差出人名を変えられる.お好みで.  
 1. 以上の設定が終わると管理者アカウントの作成を聞かれる.  
     - デフォルトIDは`admin`　　
@@ -76,21 +74,10 @@ Obtain SSL Cert ? [y/N] と聞かれるので,前項で指定したドメイン�
 1. 全行程おわり.おつかれさまでした.  
 
 ---  
+
 # アップデート  
 ```  
-bash update.sh
+mastodon-install-script/update.sh
 ```
-- master追従で更新される.
-- 安定版でのアップデートの場合はコメントアウトを変更して  
-
-```update.sh  
-#git pull
-git fetch 
-git checkout ~~~~
-```  
-とすること.  
-
-- こちらもビルド時間によっては`sudo`のパスワードを再度入力する必要あり.
-
 ---   
 
