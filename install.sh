@@ -23,8 +23,7 @@ cd ~/live
 
 # Install packages
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt install -y npm ufw
-sudo apt install -y \
+sudo apt install -y npm ufw \
   imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
@@ -52,7 +51,7 @@ rbenv global $(cat ~/live/.ruby-version)
 printf y | sudo ufw enable
 sudo ufw allow 80
 sudo ufw allow 443
-sudo ufw allow 22
+sudo ufw allow 22 //sshシャットアウト対策
 
 # Install yarn
 sudo npm install -g yarn 
@@ -66,10 +65,9 @@ then
   sudo certbot certonly -d $INSTANCE -m $EMAIL -n --nginx --agree-tos
   echo "@daily certbot renew --renew-hook \"service nginx restart\"" | sudo tee -a /etc/cron.d/certbot-renew 
 else 
-  echo "nothing" > /dev/null
+  echo ""
 fi 
 # Setup PostgreSQL
-wait
 set +e
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 set -e 
@@ -86,15 +84,15 @@ RAILS_ENV=production bundle exec rake mastodon:setup
 
 
 # Set up nginx
-cp ~/live/dist/nginx.conf ~/live/dist/nginx.conf.original
-sed -i ~/live/dist/nginx.conf -e "s/example.com/$INSTANCE/g"
+cp ~/live/dist/nginx.conf ~/live/dist/$INSTANCE.conf
+sed -i ~/live/dist/$INSTANCE.conf -e "s/example.com/$INSTANCE/g"
 if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
 then 
   sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
 else
-  echo "なにもしないをしている" > /dev/null
+  echo "" > /dev/null
 fi
-sudo cp ~/live/dist/nginx.conf /etc/nginx/conf.d/$INSTANCE.conf
+sudo ln -s /home/mastodon/live/dist/$INSTANCE.conf /etc/nginx/conf.d/$INSTANCE.conf
 
 # Set up systemd services
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
