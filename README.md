@@ -1,4 +1,4 @@
-# Mastodon鯖構築支援ｽｸﾘﾋﾟｮ  
+# Mastodon鯖構築支援スクリプト  
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/nesosuke/mastodon-install-script)][releases]
 [![branch update-stable](https://img.shields.io/badge/branch-update--stable-blueviolet)][update-stable]  
 
@@ -6,6 +6,11 @@
 [update-stable]: https://github.com/nesosuke/mastodon-install-script/tree/update-stable  
 
 **stableで構築する場合は[`update-stable`](https://github.com/nesosuke/mastodon-install-script/tree/update-stable)ブランチをお使いください。**
+
+## 注
+クソ不安定なのでエラーとか起きたりします。(無保証)  
+Issueか [nesosuke@twitter](http://twitter.com/@nesosuke) まで。  
+
 
 ## 目的  
 Mastodonサーバーがじゃかじゃか生えてほしいので。  
