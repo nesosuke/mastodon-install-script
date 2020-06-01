@@ -23,8 +23,9 @@ cd ~/live
 
 # Install packages
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt install -y npm ufw \
-  imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
+sudo apt install -y npm 
+sudo apt install -y \
+  ufw imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
