@@ -22,6 +22,7 @@ rbenv global $(cat ~/live/.ruby-version)
 cd ~/live
 gem update --system
 gem install bundler:1.17.3
+bundle update
 bundle install 
 sudo yarn install 
 
