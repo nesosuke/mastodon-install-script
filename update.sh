@@ -7,8 +7,8 @@ SKIP_POST_DEPLOYMENT_MIGRATIONS=true
 # Pull Mastodon 
 cd ~/live   
 git fetch upstream
-git checkout master
-git merge upstream/master
+git checkout main
+git merge upstream/main
 
 # Reget Yarnpkg pubkey
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
