@@ -1,11 +1,11 @@
 #!/bin/bash
 # Input server domain
-read -p "Input your server domain w/o \"http\" (e.g. mstnd.example.com) > " INSTANCE
-read -p "Obtain SSL Cert ? [y/N] > " ANSWER_SSL_CERT
+read -p "Input your server domain w/o \"http\" (e.g. mstnd.example.com) > " SERVER_DOMAIN
+read -p "Obtain SSL Cert ? [y/N] > " getCERT_FLAG
 
-if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
+if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
 then 
-  read -p "Input your mail adress > " EMAIL
+  read -p "Input your mail adress > " ADMIN_MAIL_ADDRESS
 else 
   echo ""
 fi
@@ -36,16 +36,21 @@ sudo apt install -y \
 
 set -e
 # Install Ruby and gem(s)
-rm -rf ~/.rbenv
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-cd ~/.rbenv && src/configure && make -C src
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-source ~/.bashrc 
-export  PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-rbenv install $(cat ~/live/.ruby-version) 
+
+if [ -d ~/.rbenv ]
+then
+  cd ~/.rbenv
+else
+  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+  cd ~/.rbenv && src/configure && make -C src
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+  echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+  source ~/.bashrc 
+  export  PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi 
+echo N | rbenv install $(cat ~/live/.ruby-version) 
 rbenv global $(cat ~/live/.ruby-version)
 
 # Setup ufw
@@ -60,7 +65,7 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 # Obtain SSL Cert
-if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
+if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
 then 
   sudo apt install -y certbot python3-certbot-nginx 
   sudo certbot certonly -d $INSTANCE -m $EMAIL -n --nginx --agree-tos
@@ -85,15 +90,15 @@ RAILS_ENV=production bundle exec rake mastodon:setup
 
 
 # Set up nginx
-cp ~/live/dist/nginx.conf ~/live/dist/$INSTANCE.conf
-sed -i ~/live/dist/$INSTANCE.conf -e "s/example.com/$INSTANCE/g"
-if [ "$ANSWER_SSL_CERT" == "y" -o "$ANSWER_SSL_CERT" == "Y" ]
+cp ~/live/dist/nginx.conf ~/live/dist/$SERVER_DOMAIN.conf
+sed -i ~/live/dist/$SERVER_DOMAIN.conf -e "s/example.com/$SERVER_DOMAIN/g"
+if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
 then 
   sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
 else
   echo "" > /dev/null
 fi
-sudo ln -s /home/mastodon/live/dist/$INSTANCE.conf /etc/nginx/conf.d/$INSTANCE.conf
+sudo ln -s /home/mastodon/live/dist/$SERVER_DOMAIN.conf /etc/nginx/conf.d/$SERVER_DOMAIN.conf
 
 # Set up systemd services
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
