@@ -67,8 +67,8 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 # Obtain SSL Cert
 if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
 then 
-  sudo apt install -y certbot python-certbot-nginx 
-  sudo certbot certonly -d $SERVER_DOMAIN -m $ADMIN_MAIL_ADDRESS -n --nginx --agree-tos
+  sudo apt install -y certbot python3-certbot-nginx 
+  sudo certbot certonly -d $INSTANCE -m $EMAIL -n --nginx --agree-tos
   echo "@daily certbot renew --renew-hook \"service nginx restart\"" | sudo tee -a /etc/cron.d/certbot-renew 
 else 
   echo ""
