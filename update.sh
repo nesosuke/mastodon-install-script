@@ -21,7 +21,7 @@ printf N | rbenv install $(cat ~/live/.ruby-version)
 rbenv global $(cat ~/live/.ruby-version)
 cd ~/live
 gem update --system
-gem install bundler:1.17.3
+gem install bundler
 bundle update
 bundle install 
 sudo yarn install 
@@ -33,3 +33,7 @@ RAILS_ENV=production bundle exec rails db:migrate
 RAILS_ENV=production bundle exec rails assets:precompile 
 sudo systemctl restart mastodon-*.service
 RAILS_ENV=production ~/live/bin/tootctl cache clear
+
+# Migrate again
+RAILS_ENV=production bundle exec rails db:migrate 
+sudo systemctl restart mastodon-*.service
