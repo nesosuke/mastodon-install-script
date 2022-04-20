@@ -18,7 +18,7 @@ sudo chown mastodon:mastodon ~/.config
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y git curl ufw
-git clone https://github.com/tootsuite/mastodon.git ~/live
+git clone https://github.com/mastodon/mastodon.git ~/live
 cd ~/live
 
 # Install packages
