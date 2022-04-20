@@ -2,6 +2,7 @@
 ## Run on only your responsibilitity.## 
 
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true
+export NODE_OPTIONS="--max-old-space-size=1024"
 
 
 # Pull Mastodon 
