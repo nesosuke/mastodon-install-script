@@ -4,9 +4,9 @@ read -p "Input your server domain w/o \"http\" (e.g. mstnd.example.com) > " SERV
 read -p "Obtain SSL Cert ? [y/N] > " getCERT_FLAG
 
 if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
-then 
+then
   read -p "Input your mail adress > " ADMIN_MAIL_ADDRESS
-else 
+else
   echo ""
 fi
 
@@ -23,7 +23,7 @@ cd ~/live
 
 # Install packages
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt install -y npm 
+sudo apt install -y npm
 sudo apt install -y \
   ufw imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
@@ -31,7 +31,7 @@ sudo apt install -y \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
   redis-server redis-tools postgresql postgresql-contrib \
   libidn11-dev libicu-dev libjemalloc-dev nginx
-  
+
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
 
 set -e
@@ -46,11 +46,11 @@ else
   cd ~/.rbenv && src/configure && make -C src
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
   echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-  source ~/.bashrc 
+  source ~/.bashrc
   export  PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
-fi 
-echo N | rbenv install $(cat ~/live/.ruby-version) 
+fi
+echo N | rbenv install $(cat ~/live/.ruby-version)
 rbenv global $(cat ~/live/.ruby-version)
 
 # Setup ufw
@@ -60,25 +60,25 @@ sudo ufw allow 443
 sudo ufw allow 22 #sshシャットアウト対策
 
 # Install yarn
-sudo npm install -g yarn 
+sudo npm install -g yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 # Obtain SSL Cert
 if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
-then 
-  sudo apt install -y certbot python3-certbot-nginx 
+then
+  sudo apt install -y certbot python3-certbot-nginx
   sudo certbot certonly -d $INSTANCE -m $EMAIL -n --nginx --agree-tos
-  echo "@daily certbot renew --renew-hook \"service nginx restart\"" | sudo tee -a /etc/cron.d/certbot-renew 
-else 
+  echo "@daily certbot renew --renew-hook \"service nginx restart\"" | sudo tee -a /etc/cron.d/certbot-renew
+else
   echo ""
-fi 
+fi
 # Setup PostgreSQL
 set +e
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
-set -e 
+set -e
 
-# Setup Mastodon 
+# Setup Mastodon
 rbenv global $(cat ~/live/.ruby-version)
 cd ~/live
 gem install bundler
@@ -93,7 +93,7 @@ RAILS_ENV=production bundle exec rake mastodon:setup
 cp ~/live/dist/nginx.conf ~/live/dist/$SERVER_DOMAIN.conf
 sed -i ~/live/dist/$SERVER_DOMAIN.conf -e "s/example.com/$SERVER_DOMAIN/g"
 if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
-then 
+then
   sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
 else
   echo "" > /dev/null
