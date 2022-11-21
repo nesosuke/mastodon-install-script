@@ -97,7 +97,7 @@ then
 else
   echo "" > /dev/null
 fi
-sudo ln -s /home/mastodon/live/dist/$SERVER_FQDN.conf /etc/nginx/conf.d/$SERVER_FQDN.conf
+sudo cp /home/mastodon/live/dist/$SERVER_FQDN.conf /etc/nginx/conf.d/$SERVER_FQDN.conf
 
 # Set up systemd services
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
