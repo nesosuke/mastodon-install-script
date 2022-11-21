@@ -18,7 +18,7 @@ sudo apt install -y curl wget gnupg apt-transport-https lsb-release ca-certifica
 ## Node.js v16
 curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 ## PostgreSQL
-wget -O /usr/share/keyrings/postgresql.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+sudo wget -O /usr/share/keyrings/postgresql.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
 echo "deb [signed-by=/usr/share/keyrings/postgresql.asc] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql.list
 
 # Correct permission ~/.config
@@ -47,14 +47,17 @@ sudo apt install -y \
 # Install Ruby and gem(s)
 if [ -d ~/.rbenv ]
 then
-  cd ~/.rbenv
+  echo "" > /dev/null
 else
   echo "installing rbenv"
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
   cd ~/.rbenv && src/configure && make -C src
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
   echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+  export  PATH=$HOME/.rbenv/bin:$PATH
+  eval "$(rbenv init -)"
   git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+  cd -
 fi
 echo "installing ruby"
 source ~/.bashrc
