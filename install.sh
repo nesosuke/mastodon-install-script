@@ -53,10 +53,10 @@ else
   cd ~/.rbenv && src/configure && make -C src
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
   echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-  source ~/.bashrc
   git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 fi
 echo "installing ruby"
+source ~/.bashrc
 echo N | RUBY_CONFIGURE_OPTS="--with-jemalloc" rbenv install $(cat ~/live/.ruby-version)
 rbenv global $(cat ~/live/.ruby-version)
 
