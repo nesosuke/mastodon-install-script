@@ -46,15 +46,13 @@ then
   cd ~/.rbenv
 else
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
   cd ~/.rbenv && src/configure && make -C src
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
   echo 'eval "$(rbenv init -)"' >> ~/.bashrc
   source ~/.bashrc
-  export  PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
+  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 fi
-echo N | rbenv install $(cat ~/live/.ruby-version)
+echo N | RUBY_CONFIGURE_OPTS="--with-jemalloc" rbenv install $(cat ~/live/.ruby-version)
 rbenv global $(cat ~/live/.ruby-version)
 
 # Setup ufw
@@ -82,7 +80,7 @@ echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 # Setup Mastodon
 rbenv global $(cat ~/live/.ruby-version)
 cd ~/live
-gem install bundler
+gem install bundler --no-document
 bundle install \
   -j$(getconf _NPROCESSORS_ONLN) \
   --deployment --without development test
