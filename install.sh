@@ -40,9 +40,7 @@ sudo apt install -y \
   certbot python3-certbot-nginx libidn11-dev libicu-dev libjemalloc-dev
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
 
-set -e
 # Install Ruby and gem(s)
-
 if [ -d ~/.rbenv ]
 then
   cd ~/.rbenv
@@ -79,9 +77,7 @@ else
   echo ""
 fi
 # Setup PostgreSQL
-set +e
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
-set -e
 
 # Setup Mastodon
 rbenv global $(cat ~/live/.ruby-version)
