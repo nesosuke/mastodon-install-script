@@ -56,7 +56,7 @@ echo N | RUBY_CONFIGURE_OPTS="--with-jemalloc" rbenv install $(cat ~/live/.ruby-
 rbenv global $(cat ~/live/.ruby-version)
 
 # Setup ufw
-printf y | sudo ufw enable
+echo y | sudo ufw enable
 sudo ufw allow 80
 sudo ufw allow 443
 sudo ufw allow 22 #sshシャットアウト対策
