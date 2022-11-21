@@ -10,6 +10,15 @@ else
   echo ""
 fi
 
+# Pre-requisite
+## system repository
+sudo apt install -y curl wget gnupg apt-transport-https lsb-release ca-certificates
+## Node.js v16
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+## PostgreSQL
+wget -O /usr/share/keyrings/postgresql.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+echo "deb [signed-by=/usr/share/keyrings/postgresql.asc] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql.list
+
 # Correct permission ~/.config
 sudo mkdir -p ~/.config
 sudo chown mastodon:mastodon ~/.config
@@ -22,8 +31,6 @@ git clone https://github.com/mastodon/mastodon.git ~/live
 cd ~/live
 
 # Install packages
-curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt install -y npm
 sudo apt install -y \
   imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
