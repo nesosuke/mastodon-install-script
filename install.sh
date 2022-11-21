@@ -25,13 +25,13 @@ cd ~/live
 curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt install -y npm
 sudo apt install -y \
-  ufw imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
+  imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
   redis-server redis-tools postgresql postgresql-contrib \
-  libidn11-dev libicu-dev libjemalloc-dev nginx
-
+  libidn11-dev libicu-dev libjemalloc-dev
+  
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
 
 set -e
