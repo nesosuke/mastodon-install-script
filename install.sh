@@ -1,9 +1,9 @@
 #!/bin/bash
 # Input server domain
-read -p "Input your server domain w/o \"http\" (e.g. mstnd.example.com) > " SERVER_DOMAIN
-read -p "Obtain SSL Cert ? [y/N] > " getCERT_FLAG
+read -p "Input your server domain w/o \"http\" (e.g. mstnd.example.com) > " SERVER_FQDN
+read -p "Obtain SSL Cert ? [y/N] > " SSL_CERT
 
-if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
+if [ "$SSL_CERT" == "y" -o "$SSL_CERT" == "Y" ]
 then
   read -p "Input your mail adress > " ADMIN_MAIL_ADDRESS
 else
@@ -67,9 +67,9 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 # Obtain SSL Cert
-if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
+if [ "$SSL_CERT" == "y" -o "$SSL_CERT" == "Y" ]
 then
-  sudo certbot certonly -d $SERVER_DOMAIN -m $ADMIN_MAIL_ADDRESS -n --nginx --agree-tos
+  sudo certbot certonly -d $SERVER_FQDN -m $ADMIN_MAIL_ADDRESS -n --nginx --agree-tos
   echo "@daily certbot renew --renew-hook \"service nginx restart\"" | sudo tee -a /etc/cron.d/certbot-renew
 else
   echo ""
@@ -89,15 +89,15 @@ RAILS_ENV=production bundle exec rake mastodon:setup
 
 
 # Set up nginx
-cp ~/live/dist/nginx.conf ~/live/dist/$SERVER_DOMAIN.conf
-sed -i ~/live/dist/$SERVER_DOMAIN.conf -e "s/example.com/$SERVER_DOMAIN/g"
-if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
+cp ~/live/dist/nginx.conf ~/live/dist/$SERVER_FQDN.conf
+sed -i ~/live/dist/$SERVER_FQDN.conf -e "s/example.com/$SERVER_FQDN/g"
+if [ "$SSL_CERT" == "y" -o "$SSL_CERT" == "Y" ]
 then
   sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
 else
   echo "" > /dev/null
 fi
-sudo ln -s /home/mastodon/live/dist/$SERVER_DOMAIN.conf /etc/nginx/conf.d/$SERVER_DOMAIN.conf
+sudo ln -s /home/mastodon/live/dist/$SERVER_FQDN.conf /etc/nginx/conf.d/$SERVER_FQDN.conf
 
 # Set up systemd services
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
