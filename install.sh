@@ -12,6 +12,7 @@ fi
 
 # Pre-requisite
 ## system repository
+echo "installing pre-requisite"
 sudo apt install -y curl wget gnupg apt-transport-https lsb-release ca-certificates
 ## Node.js v16
 curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
@@ -27,10 +28,12 @@ sudo chown mastodon:mastodon ~/.config
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y git curl ufw
+echo "cloning mastodon repository"
 git clone https://github.com/mastodon/mastodon.git ~/live
 cd ~/live
 
 # Install packages
+echo "installing packages"
 sudo apt install -y \
   imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
@@ -45,6 +48,7 @@ if [ -d ~/.rbenv ]
 then
   cd ~/.rbenv
 else
+  echo "installing rbenv"
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
   cd ~/.rbenv && src/configure && make -C src
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -52,6 +56,7 @@ else
   source ~/.bashrc
   git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 fi
+echo "installing ruby"
 echo N | RUBY_CONFIGURE_OPTS="--with-jemalloc" rbenv install $(cat ~/live/.ruby-version)
 rbenv global $(cat ~/live/.ruby-version)
 
@@ -62,6 +67,7 @@ sudo ufw allow 443
 sudo ufw allow 22 #sshシャットアウト対策
 
 # Install yarn
+echo "installing yarn"
 sudo npm install -g yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -69,22 +75,26 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 # Obtain SSL Cert
 if [ "$SSL_CERT" == "y" -o "$SSL_CERT" == "Y" ]
 then
+  echo "obtaining SSL Cert"
   sudo certbot certonly -d $SERVER_FQDN -m $ADMIN_MAIL_ADDRESS -n --nginx --agree-tos
   echo "@daily certbot renew --renew-hook \"service nginx restart\"" | sudo tee -a /etc/cron.d/certbot-renew
 else
   echo ""
 fi
 # Setup PostgreSQL
+echo "setting up PostgreSQL"
 echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 
 # Setup Mastodon
 rbenv global $(cat ~/live/.ruby-version)
 cd ~/live
+echo "setting up Gem"
 gem install bundler --no-document
 bundle config deployment true
 bundle config without 'development test'
 bundle install -j$(getconf _NPROCESSORS_ONLN)
 yarn install --pure-lockfile --network-timeout 100000
+echo "setting up Mastodon"
 RAILS_ENV=production bundle exec rake mastodon:setup
 
 
@@ -100,8 +110,9 @@ fi
 sudo cp /home/mastodon/live/dist/$SERVER_FQDN.conf /etc/nginx/conf.d/$SERVER_FQDN.conf
 
 # Set up systemd services
+echo "setting up systemd services"
 sudo cp /home/mastodon/live/dist/mastodon-*.service /etc/systemd/system/
 sudo systemctl enable --now mastodon-web.service mastodon-streaming.service mastodon-sidekiq.service
 sudo systemctl restart nginx.service
 
-
+echo "done :tada:"
