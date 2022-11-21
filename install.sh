@@ -81,9 +81,9 @@ echo "CREATE USER mastodon CREATEDB" | sudo -u postgres psql -f -
 rbenv global $(cat ~/live/.ruby-version)
 cd ~/live
 gem install bundler --no-document
-bundle install \
-  -j$(getconf _NPROCESSORS_ONLN) \
-  --deployment --without development test
+bundle config deployment true
+bundle config without 'development test'
+bundle install -j$(getconf _NPROCESSORS_ONLN)
 yarn install --pure-lockfile --network-timeout 100000
 RAILS_ENV=production bundle exec rake mastodon:setup
 
