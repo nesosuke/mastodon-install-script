@@ -29,9 +29,8 @@ sudo apt install -y \
   g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
   bison build-essential libssl-dev libyaml-dev libreadline6-dev \
   zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
-  redis-server redis-tools postgresql postgresql-contrib \
-  libidn11-dev libicu-dev libjemalloc-dev
-  
+  nginx redis-server redis-tools postgresql postgresql-contrib \
+  certbot python3-certbot-nginx libidn11-dev libicu-dev libjemalloc-dev
 ## (c.f. https://qiita.com/yakumo/items/10edeca3742689bf073e about not needing to install "libgdbm5")
 
 set -e
@@ -67,7 +66,6 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 # Obtain SSL Cert
 if [ "$getCERT_FLAG" == "y" -o "$getCERT_FLAG" == "Y" ]
 then
-  sudo apt install -y certbot python3-certbot-nginx
   sudo certbot certonly -d $SERVER_DOMAIN -m $ADMIN_MAIL_ADDRESS -n --nginx --agree-tos
   echo "@daily certbot renew --renew-hook \"service nginx restart\"" | sudo tee -a /etc/cron.d/certbot-renew
 else
