@@ -1,6 +1,6 @@
 #!/bin/bash
 # Input server domain
-read -p "Input your server domain w/o \"http\" (e.g. mstnd.example.com) > " SERVER_FQDN
+read -p "Input your server domain without \"http\" (e.g. mastodon.example.com) > " SERVER_FQDN
 read -p "Obtain SSL Cert ? [y/N] > " SSL_CERT
 
 if [ "$SSL_CERT" == "y" -o "$SSL_CERT" == "Y" ]
