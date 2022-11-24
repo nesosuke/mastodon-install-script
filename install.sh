@@ -107,7 +107,7 @@ cp ~/live/dist/nginx.conf ~/live/dist/$SERVER_FQDN.conf
 sed -i ~/live/dist/$SERVER_FQDN.conf -e "s/example.com/$SERVER_FQDN/g"
 if [ "$SSL_CERT" == "y" -o "$SSL_CERT" == "Y" ]
 then
-  sed -i ~/live/dist/nginx.conf -e 's/# ssl_certificate/ssl_certificate/g'
+  sed -i ~/live/dist/$SERVER_FQDN.conf -e 's/# ssl_certificate/ssl_certificate/g'
 else
   echo "" > /dev/null
 fi
