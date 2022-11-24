@@ -31,6 +31,7 @@ sudo apt upgrade -y
 sudo apt install -y git curl ufw
 echo "cloning mastodon repository"
 git clone https://github.com/mastodon/mastodon.git ~/live
+git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
 cd ~/live
 
 # Install packages
