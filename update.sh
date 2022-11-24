@@ -1,6 +1,8 @@
 #!/bin/bash
 ## Run on only your responsibilitity.##
 
+sudo echo ""
+
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true
 export NODE_OPTIONS="--max-old-space-size=1024"
 
@@ -13,8 +15,6 @@ git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 
 # Update pkg(s)
-sudo apt update -y
-sudo apt upgrade -y
 cd ~/.rbenv/plugins/ruby-build && git pull
 printf N | rbenv install $(cat ~/live/.ruby-version)
 rbenv global $(cat ~/live/.ruby-version)
