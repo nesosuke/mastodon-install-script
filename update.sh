@@ -16,7 +16,7 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 
 # Update pkg(s)
 cd ~/.rbenv/plugins/ruby-build && git pull
-printf N | rbenv install $(cat ~/live/.ruby-version)
+echo N | rbenv install $(cat ~/live/.ruby-version)
 rbenv global $(cat ~/live/.ruby-version)
 cd ~/live
 gem update --system
