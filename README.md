@@ -37,7 +37,7 @@ $ ./install.sh
 
 [^setup]: <https://docs.joinmastodon.org/admin/install/#generating-a-configuration>
 
-### Update Mastodon (Under in development)
+### Update Mastodon
 
 1. Change user to `mastodon` and clone this repository.
 
