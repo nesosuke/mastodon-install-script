@@ -58,9 +58,3 @@ $ ./update.sh
 
 - Mastodon(github repo) <https://github.com/mastodon/mastodon>
 - Official Installation Manual <https://docs.joinmastodon.org/admin/install/>
-
-## Contact
-
-- GitHub https://github.com/nesosuke
-- Twitter @nesosuke@twitter.com
-- Mastodon @neso@mstdn.home.neso.tech
