@@ -10,7 +10,7 @@ else
   echo ""
 fi
 
-DEBIN_FRONTEND=noninteractive
+DEBIAN_FRONTEND=noninteractive
 # Pre-requisite
 ## system repository
 echo "installing pre-requisite"
