@@ -114,6 +114,7 @@ else
 fi
 sudo cp /home/mastodon/live/dist/$SERVER_FQDN.conf /etc/nginx/sites-available/mastodon
 sudo ln -s /etc/nginx/sites-available/mastodon /etc/nginx/sites-enabled/mastodon
+sudo rm /etc/nginx/sites-enabled/default
 
 # Set up systemd services
 echo "setting up systemd services"
