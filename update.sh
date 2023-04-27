@@ -10,7 +10,7 @@ export NODE_OPTIONS="--max-old-space-size=1024"
 
 # Pull Mastodon
 cd ~/live
-git pull
+git pull origin main
 
 # Reget Yarnpkg pubkey
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
