@@ -1,6 +1,7 @@
 #!/bin/bash
 ## Run on only your responsibilitity.##
-
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 sudo echo ""
 
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true
