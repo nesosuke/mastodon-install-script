@@ -37,3 +37,6 @@ RAILS_ENV=production ~/live/bin/tootctl cache clear
 # Migrate again
 RAILS_ENV=production bundle exec rails db:migrate
 sudo systemctl restart mastodon-*.service
+
+sleep 120
+sudo reboot
