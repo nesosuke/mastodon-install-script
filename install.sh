@@ -30,7 +30,7 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt install -y git curl ufw
 echo "cloning mastodon repository"
-git clone https://github.com/mastodon/mastodon.git ~/live
+git clone https://git.aiursoft.cn/PublicVault/mastodon.git ~/live
 git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
 cd ~/live
 
@@ -51,13 +51,13 @@ then
   echo "" > /dev/null
 else
   echo "installing rbenv"
-  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+  git clone https://git.aiursoft.cn/PublicVault/rbenv.git ~/.rbenv
   cd ~/.rbenv && src/configure && make -C src
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
   echo 'eval "$(rbenv init -)"' >> ~/.bashrc
   export  PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
-  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+  git clone https://git.aiursoft.cn/PublicVault/ruby-build.git ~/.rbenv/plugins/ruby-build
   cd -
 fi
 echo "installing ruby"
