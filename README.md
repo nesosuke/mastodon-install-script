@@ -5,7 +5,7 @@ I hope it will be useful for you.
 
 **NOTE: By using this script, Mastodon will be installed on non-docker environment.**
 
-[![ManHours](https://manhours.aiursoft.cn/gitlab/gitlab.aiursoft.cn/anduin/Mastodon-install-script.svg)](https://gitlab.aiursoft.cn/anduin/Mastodon-install-script/-/commits/master?ref_type=heads)
+[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/anduin/Mastodon-install-script.svg)](https://gitlab.aiursoft.cn/anduin/Mastodon-install-script/-/commits/master?ref_type=heads)
 
 ## Usage
 
