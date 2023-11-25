@@ -1,6 +1,7 @@
 #!/bin/bash
 ## Run on only your responsibilitity.##
-
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 sudo echo ""
 
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true
@@ -9,8 +10,7 @@ export NODE_OPTIONS="--max-old-space-size=1024"
 
 # Pull Mastodon
 cd ~/live
-git fetch
-git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
+git pull origin main
 
 # Reget Yarnpkg pubkey
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -37,3 +37,6 @@ RAILS_ENV=production ~/live/bin/tootctl cache clear
 # Migrate again
 RAILS_ENV=production bundle exec rails db:migrate
 sudo systemctl restart mastodon-*.service
+
+sleep 120
+sudo reboot

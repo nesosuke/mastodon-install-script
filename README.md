@@ -5,6 +5,8 @@ I hope it will be useful for you.
 
 **NOTE: By using this script, Mastodon will be installed on non-docker environment.**
 
+[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/anduin/Mastodon-install-script.svg)](https://gitlab.aiursoft.cn/anduin/Mastodon-install-script/-/commits/master?ref_type=heads)
+
 ## Usage
 
 ### Install Mastodon
@@ -20,16 +22,16 @@ I hope it will be useful for you.
 
 ```bash
 # su - mastodon
-$ cd ~
-$ git clone https://github.com/nesosuke/mastodon-install-script.git
+cd ~
+git clone https://github.com/nesosuke/mastodon-install-script.git
 ```
 
 3. Run `install.sh`.
    This script will ask you to enter the server's domain name and email address of the administrator.
 
 ```bash
-$ cd mastodon-install-script
-$ ./install.sh
+cd mastodon-install-script
+./install.sh
 ```
 
 4. Follow the interactive instructions.
@@ -43,15 +45,15 @@ $ ./install.sh
 
 ```bash
 # su - mastodon
-$ cd ~
-$ git clone https://github.com/nesosuke/mastodon-install-script.git
+cd ~
+git clone https://github.com/nesosuke/mastodon-install-script.git
 ```
 
 2. Run `update.sh`.
 
 ```bash
-$ cd mastodon-install-script
-$ ./update.sh
+cd mastodon-install-script
+./update.sh
 ```
 
 ## Reference
